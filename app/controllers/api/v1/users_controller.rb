@@ -12,22 +12,21 @@ class Api::V1::UsersController < ApplicationController
 
     def show
       user = User.find(params[:id])
-      jams = user.jams
-      stories = user.stories
-      render json: {user: user, jams: jams, stories: stories}
+      scripts = user.scripts
+      render json: {user: user, scripts: scripts}
     end
 
     def update
       user = User.find(params[:id])
-      user.update(jam_params)
+      user.update(user_params)
       render json: user
     end
 
 
     private
 
-    def jam_params
-      params.require(:user).permit(:name, :description, :password, :password_confirmation)
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :password, :password_confirmation)
     end
   end
 
